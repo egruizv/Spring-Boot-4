@@ -1,0 +1,10 @@
+Este es el directorio con los archivos de las imagenes de las vacantes y los curriculums vitae de la base de datos de ejemplo.
+Estos directorios son los siguientes, según tu sistema operativo:
+
+Windows
+  c:/empleos/img-vacantes/
+  c:/empleos/files-cv/
+
+Linux/Mac
+  /empleos/img-vacantes/
+  /empleos/files-cv/
