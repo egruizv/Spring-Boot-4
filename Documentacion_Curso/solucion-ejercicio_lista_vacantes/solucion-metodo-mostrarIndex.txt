@@ -1,0 +1,9 @@
+
+// Solucion método mostrarIndex
+
+@GetMapping("/index")
+public String mostrarIndex(Model model) {
+	List<Vacante> lista = serviceVacantes.buscarTodas();
+	model.addAttribute("vacantes", lista);
+	return "vacantes/listVacantes";
+}

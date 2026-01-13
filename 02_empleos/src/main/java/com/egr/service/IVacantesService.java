@@ -5,6 +5,7 @@ import com.egr.model.Vacante;
 
 public interface IVacantesService {
 
-	List<Vacante> buscartodas();	
+	List<Vacante> buscarTodas();	
 	Vacante buscarPorId(Integer idVacante);
+	void guardar(Vacante vacante);
 }

@@ -2,12 +2,14 @@ package com.egr.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+
 import org.springframework.stereotype.Service;
 
+import com.egr.model.Categoria;
 import com.egr.model.Vacante;
 
 @Service
@@ -20,6 +22,13 @@ public class VacantesServiceImpl implements IVacantesService {
 	public VacantesServiceImpl() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		lista = new LinkedList<Vacante>();
+		
+		
+				
+		CategoriasServiceImpl serviceCategorias = new CategoriasServiceImpl();
+		Categoria categoria1 = serviceCategorias.buscarPorId(1);		
+		Categoria categoria2 = serviceCategorias.buscarPorId(2);
+		
 		try {
 			// Creamos la oferta de Trabajo 1.
 			Vacante vacante1 = new Vacante();
@@ -29,6 +38,8 @@ public class VacantesServiceImpl implements IVacantesService {
 			vacante1.setFecha(sdf.parse("08-02-2019"));
 			vacante1.setSalario(14000.0);
 			vacante1.setDestacado(1);
+			vacante1.setCategoria(categoria1);
+			vacante1.setEstatus("Dato Inicial");
 			vacante1.setImagen("empresa1.png");
 						
 			// Creamos la oferta de Trabajo 2.
@@ -39,6 +50,8 @@ public class VacantesServiceImpl implements IVacantesService {
 			vacante2.setFecha(sdf.parse("09-02-2019"));			
 			vacante2.setSalario(12000.0);
 			vacante2.setDestacado(0);
+			vacante2.setCategoria(categoria2);
+			vacante2.setEstatus("Dato Inicial");
 			vacante2.setImagen("empresa2.png");
 			
 			// Creamos la oferta de Trabajo 3.
@@ -49,6 +62,8 @@ public class VacantesServiceImpl implements IVacantesService {
 			vacante3.setFecha(sdf.parse("10-02-2019"));
 			vacante3.setSalario(10500.0);
 			vacante3.setDestacado(0);
+			vacante3.setCategoria(categoria2);
+			vacante3.setEstatus("Dato Inicial");
 			
 			// Creamos la oferta de Trabajo 4.
 			Vacante vacante4 = new Vacante();
@@ -58,6 +73,8 @@ public class VacantesServiceImpl implements IVacantesService {
 			vacante4.setFecha(sdf.parse("11-02-2019"));
 			vacante4.setSalario(7500.0);
 			vacante4.setDestacado(1);
+			vacante4.setCategoria(categoria1);
+			vacante4.setEstatus("Dato Inicial");
 			vacante4.setImagen("empresa3.png");
 			
 			/**
@@ -75,7 +92,7 @@ public class VacantesServiceImpl implements IVacantesService {
 	}
 	
 	@Override
-	public List<Vacante> buscartodas() {
+	public List<Vacante> buscarTodas() {
 		// TODO Regresamos la lista que es una variable privada que es rellena en el constructor
 		return lista;
 	}
@@ -88,6 +105,14 @@ public class VacantesServiceImpl implements IVacantesService {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void guardar(Vacante vacante) {
+		// Guardaremos en un futuro la vacante en BBDD
+		// Ahora lo metemos en una lista
+		lista.add(vacante);
+		
 	}
 
 }

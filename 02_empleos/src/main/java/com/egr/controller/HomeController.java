@@ -1,7 +1,7 @@
 package com.egr.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+//import java.text.ParseException;
+//import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class HomeController {
 	
 	@GetMapping("/tabla")
 	public String mostrarTabla(Model model) {		
-		List<Vacante> listaVacantes = serviceVacantes.buscartodas();
+		List<Vacante> listaVacantes = serviceVacantes.buscarTodas();
 		model.addAttribute("vacantes", listaVacantes);
 		
 		return "tabla";
@@ -53,7 +53,7 @@ public class HomeController {
 	
 	@GetMapping("/") //TODO Peticion tipo Get en Raiz (http://localhost:8080/)
 	public String mostrarHome(Model model) {
-		List<Vacante> listaVacantes = serviceVacantes.buscartodas();
+		List<Vacante> listaVacantes = serviceVacantes.buscarTodas();
 		model.addAttribute("vacantes", listaVacantes);		
 		return "home"; //TODO Esta es la vista, que corresponde a la pagina html que hay en src/main/resource/templates/home.html
 	}

@@ -13,6 +13,13 @@ public class Vacante {
 	private Integer destacado;
 	private String imagen= "no-image.png"; // Imagen de la empresa que realiza la oferta Nota: Se inicializa a no-image.png para que las emperesas que no tengamos imagn salga la no-image.png
 	
+	private Categoria categoria; // TODO que sea de tipo Categoria
+	private String estatus;
+	private String detalles;
+	
+	
+	
+	
 	//GETTERS y SETTERS
 	public Integer getId() {
 		return id;
@@ -60,11 +67,40 @@ public class Vacante {
 		this.imagen = imagen;
 	}
 	
+	
+	
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
+	
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+	public String getDetalles() {
+		return detalles;
+	}
+	public void setDetalles(String detalles) {
+		this.detalles = detalles;
+	}
 	@Override
 	public String toString() {
 		return "Vacante [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha=" + fecha
-				+ ", salario=" + salario + ", destacado=" + destacado + ", imagen=" + imagen + "]";
+				+ ", salario=" + salario + ", destacado=" + destacado + ", imagen=" + imagen + ", categoria="
+				+ categoria + ", estatus=" + estatus + ", detalles=" + detalles + "]";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

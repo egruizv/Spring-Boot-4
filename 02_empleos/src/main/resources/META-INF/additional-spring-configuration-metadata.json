@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "empleos.app.ruta.imagenes",
+  "type": "java.lang.String",
+  "description": "Ruta donde incluir las imagenes de las vacantes'"
+}]}
