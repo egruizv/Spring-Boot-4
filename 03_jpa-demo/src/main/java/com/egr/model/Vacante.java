@@ -2,9 +2,22 @@ package com.egr.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+//import jakarta.persistence.Transient;
+
 // TODO estructura de Bean 
+@Entity
+@Table(name="vacantes")
 public class Vacante {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; 
 	private String nombre;// Nombre de la vacante
 	private String descripcion; // Descripcion de la vacante u oferta 
@@ -13,7 +26,17 @@ public class Vacante {
 	private Integer destacado;
 	private String imagen= "no-image.png"; // Imagen de la empresa que realiza la oferta Nota: Se inicializa a no-image.png para que las emperesas que no tengamos imagn salga la no-image.png
 	
+	//@Transient //TODO esto hace que el mapeo se ignore para Categoria
+	@OneToOne //Relacion 1 a 1 entre Vacante y Catwgoria
+	@JoinColumn(name="idCategoria") //Clave foranea 
 	private Categoria categoria; // TODO que sea de tipo Categoria
+	/*
+	 * QUERY // RELACION 1 a 1 tabla vacante y tabla categoria
+			select v.id, v.nombre, c.nombre from vacantes v
+			inner join categorias c on c.id = v.idCategoria;
+	 */
+	
+	
 	private String estatus;
 	private String detalles;
 	
