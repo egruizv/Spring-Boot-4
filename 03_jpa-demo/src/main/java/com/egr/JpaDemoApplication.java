@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import com.egr.model.Categoria;
 import com.egr.repository.CategoriasRepository;
@@ -42,9 +45,65 @@ public class JpaDemoApplication implements CommandLineRunner { // TODO para que 
 		*/
 		//buscarTodos();
 		//existeId(50);	
+		/*
 		List<Categoria> listaCategorias = getListaCategorias();
 		saveAll(listaCategorias);
+		*/
+		//borrarTodosEnBloque();
+		//buscarTodosOrdenados();
+		//buscarTodosPaginacion();
+		buscarTodosPaginacionOrdenados();
 		
+	}
+	
+	// TODO Estamos usando desde el principio JpaRepositoru 
+	
+	private void buscarTodosPaginacionOrdenados() {
+	
+		// Paginacion + Ordenacion 
+	Page<Categoria> pageCategorias = repo.findAll(PageRequest.of(0, 5,Sort.by("nombre")));
+	
+	//TODO podemos preguntar usando el objeto pageCategorias el numero de paginas y el numero de registros
+	System.out.println("TOTAL REGISTROS: "  + pageCategorias.getTotalElements());
+	System.out.println("TOTAL PAGINAS: "  + pageCategorias.getTotalPages());
+	
+	for (Categoria cat : pageCategorias.getContent()) {
+		System.out.println(cat.getId() + " " + cat.getNombre());
+	}
+	}
+	
+	
+	private void buscarTodosPaginacion() {
+		/*
+		  	pageNumber zero-based page number, must not be negative.--> Numero de pagina Nota la pagina 1 es el 0
+			pageSize the size of the page to be returned, must be greater than 0.--> Numero de elementos por pagina. tiene q	ue ser positivo
+		 */
+		Page<Categoria> pageCategorias = repo.findAll(PageRequest.of(0, 3));
+		//QUERYS
+		//Hibernate: select c1_0.id,c1_0.descripcion,c1_0.nombre from categorias c1_0 limit ?,?
+		//Hibernate: select count(c1_0.id) from categorias c1_0
+		
+		//TODO podemos preguntar usando el objeto pageCategorias el numero de paginas y el numero de registros
+		System.out.println("TOTAL REGISTROS: "  + pageCategorias.getTotalElements());
+		System.out.println("TOTAL PAGINAS: "  + pageCategorias.getTotalPages());
+		
+		for (Categoria cat : pageCategorias.getContent()) {
+			System.out.println(cat.getId() + " " + cat.getNombre());
+		}
+	}
+	
+	private void buscarTodosOrdenados() {
+		//List<Categoria> listCategorias = repo.findAll(Sort.by("nombre"));// Si no ponemos nada es ascendiente	
+		List<Categoria> listCategorias = repo.findAll(Sort.by("nombre").descending());//Descenciente 	
+		// select c1_0.id,c1_0.descripcion,c1_0.nombre from categorias c1_0 order by c1_0.nombre
+		for (Categoria cat : listCategorias) {
+			System.out.println(cat.getId() + " " + cat.getNombre());
+		}
+	}
+	
+	
+	private void borrarTodosEnBloque() { //TODO Usar con precaucion ya que borra todos en bloque (Deletes all entities in a batch call.)
+		repo.deleteAllInBatch();// delete c1_0 from categorias c1_0
 	}
 	
 	
@@ -62,6 +121,7 @@ public class JpaDemoApplication implements CommandLineRunner { // TODO para que 
 		List<Categoria> listCategorias = repo.findAll();		
 		for (Categoria cat : listCategorias) {
 			System.out.println(cat);
+			System.out.println(cat.getId() + " " + cat.getNombre());
 		}
 		
 	}
@@ -75,7 +135,7 @@ public class JpaDemoApplication implements CommandLineRunner { // TODO para que 
 		}
 	}
 	
-	private void eliminarTodos() {
+	private void eliminarTodos() { //TODO cuando hay pocos registros ya que elimina uno a uno
 		repo.deleteAll();
 	}
 	
