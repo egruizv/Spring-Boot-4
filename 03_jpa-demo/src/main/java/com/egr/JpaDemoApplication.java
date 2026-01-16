@@ -180,7 +180,7 @@ public class JpaDemoApplication implements CommandLineRunner { // TODO para que 
 		List<String> listaEstatus;
 		listaEstatus = obtenerEstatus();
 		List<Vacante> listaVacante = repoVacantes.findByEstatusIn(listaEstatus);
-		//QUERY : 	select v1_0.id,v1_0.idCategoria,v1_0.descripcion,v1_0.destacado,v1_0.detalles,v1_0.estatus,v1_0.fecha,v1_0.imagen,v1_0.nombre,v1_0.salario from vacantes v1_0 where v1_0.estatus=?
+		//QUERY : 	select v1_0.id,v1_0.idCategoria,v1_0.descripcion,v1_0.destacado,v1_0.detalles,v1_0.estatus,v1_0.fecha,v1_0.imagen,v1_0.nombre,v1_0.salario from vacantes v1_0 where v1_0.estatus in (?,?)
 		//			select c1_0.id,c1_0.descripcion,c1_0.nombre from categorias c1_0 where c1_0.id=?
 		
 		System.out.println("Registros encontrados: " + listaVacante.size());
